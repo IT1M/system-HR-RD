@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التدريب والتطوير المتقدم</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --light-bg: #f8f9fa;
+            --dark-text: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            margin: 0 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .sidebar {
+            background-color: white;
+            min-height: calc(100vh - 76px);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+        }
+
+        .sidebar-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-right: 3px solid transparent;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-right-color: var(--primary-color);
+        }
+
+        .sidebar-item.active {
+            background-color: rgba(67, 97, 238, 0.15);
+            border-right-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .sidebar-item i {
+            margin-left: 10px;
+            color: var(--primary-color);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            font-weight: 600;
+            padding: 15px 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            border-color: var(--warning-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            border-color: var(--danger-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+        }
+
+        .stat-card {
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .stat-card.success {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+        }
+
+        .stat-card.warning {
+            background: linear-gradient(135deg, var(--warning-color), #e65100);
+        }
+
+        .stat-card.danger {
+            background: linear-gradient(135deg, var(--danger-color), #b71c1c);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(-400px);
+            transition: transform 0.3s;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+        }
+
+        .notification.warning {
+            background-color: var(--warning-color);
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+
+        .notification.info {
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .certificate-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .certificate-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .certificate-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .status-valid {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: #2e7d32;
+        }
+
+        .status-expiring {
+            background-color: rgba(255, 152, 0, 0.15);
+            color: #e65100;
+        }
+
+        .status-expired {
+            background-color: rgba(244, 67, 54, 0.15);
+            color: #b71c1c;
+        }
+
+        .mentor-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .mentor-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .mentor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-left: 15px;
+            object-fit: cover;
+        }
+
+        .mentor-info h5 {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .mentor-info p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .mentor-rating {
+            color: #ffc107;
+            margin-right: 10px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stat-card {
+                margin-bottom: 15px;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-graduation-cap me-2"></i>
+                نظام التدريب والتطوير المتقدم
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="dashboard">
+                            <i class="fas fa-tachometer-alt me-1"></i>
+                            لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="gap-analysis">
+                            <i class="fas fa-search me-1"></i>
+                            تحليل الفجوات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="training-paths">
+                            <i class="fas fa-route me-1"></i>
+                            المسارات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="content-generation">
+                            <i class="fas fa-file-alt me-1"></i>
+                            توليد المحتوى
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="effectiveness">
+                            <i class="fas fa-chart-line me-1"></i>
+                            فعالية التدريب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="certificates">
+                            <i class="fas fa-certificate me-1"></i>
+                            الشهادات المهنية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="impact-analysis">
+                            <i class="fas fa-analytics me-1"></i>
+                            تحليل التأثير
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="mentorship">
+                            <i class="fas fa-user-friends me-1"></i>
+                            الإرشاد والتوجيه
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            مدير النظام
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-start">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 col-md-3 sidebar">
+                <div class="sidebar-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة التحكم</span>
+                </div>
+                <div class="sidebar-item" data-section="gap-analysis">
+                    <i class="fas fa-search"></i>
+                    <span>تحليل الفجوات</span>
+                </div>
+                <div class="sidebar-item" data-section="training-paths">
+                    <i class="fas fa-route"></i>
+                    <span>المسارات التدريبية</span>
+                </div>
+                <div class="sidebar-item" data-section="content-generation">
+                    <i class="fas fa-file-alt"></i>
+                    <span>توليد المحتوى</span>
+                </div>
+                <div class="sidebar-item" data-section="effectiveness">
+                    <i class="fas fa-chart-line"></i>
+                    <span>فعالية التدريب</span>
+                </div>
+                <div class="sidebar-item" data-section="certificates">
+                    <i class="fas fa-certificate"></i>
+                    <span>الشهادات المهنية</span>
+                </div>
+                <div class="sidebar-item" data-section="impact-analysis">
+                    <i class="fas fa-analytics"></i>
+                    <span>تحليل التأثير</span>
+                </div>
+                <div class="sidebar-item" data-section="mentorship">
+                    <i class="fas fa-user-friends"></i>
+                    <span>الإرشاد والتوجيه</span>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 col-md-9 content">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section active">
+                    <h2 class="mb-4">لوحة التحكم</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card primary">
+                                <i class="fas fa-users"></i>
+                                <h3>248</h3>
+                                <p>الموظفون المسجلون</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card success">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h3>42</h3>
+                                <p>الدورات التدريبية</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card warning">
+                                <i class="fas fa-clock"></i>
+                                <h3>18</h3>
+                                <p>شهادات منتهية</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stat-card danger">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>7</h3>
+                                <p>فجوات معرفية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">تقدم التدريب الشهري</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="trainingProgressChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">التدريبات القادمة</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="me-3">
+                                            <i class="fas fa-laptop-code fa-2x text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h6>تطوير الويب المتقدم</h6>
+                                            <p class="mb-0 text-muted">15 مايو 2023</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="me-3">
+                                            <i class="fas fa-chart-pie fa-2x text-success"></i>
+                                        </div>
+                                        <div>
+                                            <h6>تحليل البيانات</h6>
+                                            <p class="mb-0 text-muted">22 مايو 2023</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3">
+                                            <i class="fas fa-shield-alt fa-2x text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <h6>الأمن السيبراني</h6>
+                                            <p class="mb-0 text-muted">30 مايو 2023</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">آخر التحديثات</h5>
+                                    <button class="btn btn-sm btn-light">عرض الكل</button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>الموظف</th>
+                                                    <th>الدورة التدريبية</th>
+                                                    <th>التقدم</th>
+                                                    <th>الحالة</th>
+                                                    <th>آخر تحديث</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>أحمد محمد</td>
+                                                    <td>إدارة المشاريع</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-success">مكتمل</span></td>
+                                                    <td>منذ يومين</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>فاطمة علي</td>
+                                                    <td>تطوير تطبيقات الجوال</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-primary" style="width: 60%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-primary">قيد التقدم</span></td>
+                                                    <td>منذ 3 أيام</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>خالد سالم</td>
+                                                    <td>التحليل المالي</td>
+                                                    <td>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-warning" style="width: 30%"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-warning">متأخر</span></td>
+                                                    <td>منذ أسبوع</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gap Analysis Section -->
+                <div id="gap-analysis" class="content-section">
+                    <h2 class="mb-4">تحليل الفجوات المعرفية</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">تحليل الفجوات باستخدام Gemini API</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="employee-select" class="form-label">اختر الموظف</label>
+                                            <select class="form-select" id="employee-select">
+                                                <option selected>اختر موظف...</option>
+                                                <option>أحمد محمد</option>
+                                                <option>فاطمة علي</option>
+                                                <option>خالد سالم</option>
+                                                <option>مريم عبدالله</option>
+                                                <option>يوسف أحمد</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="department-select" class="form-label">اختر القسم</label>
+                                            <select class="form-select" id="department-select">
+                                                <option selected>اختر قسم...</option>
+                                                <option>تقنية المعلومات</option>
+                                                <option>الموارد البشرية</option>
+                                                <option>التسويق</option>
+                                                <option>المالية</option>
+                                                <option>العمليات</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-center mb-4">
+                                        <button class="btn btn-primary" onclick="analyzeGaps()">
+                                            <i class="fas fa-search me-2"></i>تحليل الفجوات
+                                        </button>
+                                    </div>
+                                    
+                                    <div id="gap-analysis-results" class="mt-4">
+                                        <h5 class="mb-3">نتائج تحليل الفجوات</h5>
+                                        
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            تم تحديد 5 فجوات معرفية تحتاج إلى معالجة
+                                        </div>
+                                        
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>المهارة المطلوبة</th>
+                                                        <th>المستوى الحالي</th>
+                                                        <th>المستوى المطلوب</th>
+                                                        <th>الفجوة</th>
+                                                        <th>الأولوية</th>
+                                                        <th>التوصيات</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>إدارة المشاريع المتقدمة</td>
+                                                        <td>متوسط</td>
+                                                        <td>خبير</td>
+                                                        <td>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="badge bg-danger">عالية</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="showCourseRecommendation('إدارة المشاريع المتقدمة')">
+                                                                <i class="fas fa-book me-1"></i>دورات مقترحة
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>تحليل البيانات</td>
+                                                        <td>مبتدئ</td>
+                                                        <td>متقدم</td>
+                                                        <td>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="badge bg-warning">متوسطة</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="showCourseRecommendation('تحليل البيانات')">
+                                                                <i class="fas fa-book me-1"></i>دورات مقترحة
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>التواصل الفعال</td>
+                                                        <td>جيد</td>
+                                                        <td>ممتاز</td>
+                                                        <td>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-success" style="width: 20%"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><span class="badge bg-success">منخفضة</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="showCourseRecommendation('التواصل الفعال')">
+                                                                <i class="fas fa-book me-1"></i>دورات مقترحة
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Paths Section -->
+                <div id="training-paths" class="content-section">
+                    <h2 class="mb-4">المسارات التدريبية الفردية</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">إنشاء مسار تدريبي جديد</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="employee-name" class="form-label">اسم الموظف</label>
+                                                <input type="text" class="form-control" id="employee-name" placeholder="أدخل اسم الموظف">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="employee-position" class="form-label">المنصب الوظيفي</label>
+                                                <input type="text" class="form-control" id="employee-position" placeholder="أدخل المنصب الوظيفي">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="career-goals" class="form-label">الأهداف المهنية</label>
+                                            <textarea class="form-control" id="career-goals" rows="3" placeholder="صف الأهداف المهنية للموظف"></textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="skill-gaps" class="form-label">الفجوات المهارية</label>
+                                            <textarea class="form-control" id="skill-gaps" rows="3" placeholder="اذكر الفجوات المهارية التي تحتاج إلى تطوير"></textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="timeframe" class="form-label">الإطار الزمني</label>
+                                            <select class="form-select" id="timeframe">
+                                                <option selected>اختر الإطار الزمني</option>
+                                                <option>3 أشهر</option>
+                                                <option>6 أشهر</option>
+                                                <option>سنة</option>
+                                                <option>سنتان</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary" onclick="generateTrainingPath()">
+                                                <i class="fas fa-magic me-2"></i>توليد المسار التدريبي
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">المسارات التدريبية الحالية</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3 p-3 border rounded">
+                                        <div class="me-3">
+                                            <i class="fas fa-user-circle fa-3x text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h6>أحمد محمد</h6>
+                                            <p class="mb-1 text-muted">مطور واجهات أمامية</p>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-success" style="width: 65%"></div>
+                                            </div>
+                                            <small class="text-muted">65% مكتمل</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center mb-3 p-3 border rounded">
+                                        <div class="me-3">
+                                            <i class="fas fa-user-circle fa-3x text-success"></i>
+                                        </div>
+                                        <div>
+                                            <h6>فاطمة علي</h6>
+                                            <p class="mb-1 text-muted">محللة بيانات</p>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                            </div>
+                                            <small class="text-muted">40% مكتمل</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center p-3 border rounded">
+                                        <div class="me-3">
+                                            <i class="fas fa-user-circle fa-3x text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <h6>خالد سالم</h6>
+                                            <p class="mb-1 text-muted">مدير مشاريع</p>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-warning" style="width: 25%"></div>
+                                            </div>
+                                            <small class="text-muted">25% مكتمل</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">عرض المسار التدريبي</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="training-path-view" class="d-none">
+                                        <h6 class="mb-3">المسار التدريبي: تطوير مهارات القيادة</h6>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">المرحلة الأولى: الأساسيات</h6>
+                                                        <p class="card-text">مدة: 4 أسابيع</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><i class="fas fa-check-circle text-success me-2"></i>مبادئ القيادة</li>
+                                                            <li><i class="fas fa-check-circle text-success me-2"></i>التواصل الفعال</li>
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>إدارة الوقت</li>
+                                                        </ul>
+                                                        <button class="btn btn-sm btn-primary">عرض التفاصيل</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 mb-4">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">المرحلة الثانية: المتقدمة</h6>
+                                                        <p class="card-text">مدة: 6 أسابيع</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>إدارة الفرق</li>
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>حل المشكلات</li>
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>اتخاذ القرارات</li>
+                                                        </ul>
+                                                        <button class="btn btn-sm btn-primary">عرض التفاصيل</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 mb-4">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">المرحلة الثالثة: الخبرة</h6>
+                                                        <p class="card-text">مدة: 8 أسابيع</p>
+                                                        <ul class="list-unstyled">
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>القيادة الاستراتيجية</li>
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>إدارة التغيير</li>
+                                                            <li><i class="fas fa-circle text-muted me-2"></i>الابتكار والإبداع</li>
+                                                        </ul>
+                                                        <button class="btn btn-sm btn-primary">عرض التفاصيل</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-success">
+                                                <i class="fas fa-save me-2"></i>حفظ المسار التدريبي
+                                            </button>
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-share me-2"></i>مشاركة مع الموظف
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="no-path-message" class="text-center py-5">
+                                        <i class="fas fa-route fa-4x text-muted mb-3"></i>
+                                        <h5>لم يتم إنشاء مسار تدريبي بعد</h5>
+                                        <p class="text-muted">استخدم النموذج أعلاه لإنشاء مسار تدريبي جديد</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Generation Section -->
+                <div id="content-generation" class="content-section">
+                    <h2 class="mb-4">توليد المحتوى التدريبي المخصص</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">إنشاء محتوى تدريبي جديد</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="content-title" class="form-label">عنوان المحتوى</label>
+                                                <input type="text" class="form-control" id="content-title" placeholder="أدخل عنوان المحتوى">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="content-type" class="form-label">نوع المحتوى</label>
+                                                <select class="form-select" id="content-type">
+                                                    <option selected>اختر نوع المحتوى</option>
+                                                    <option>عرض تقديمي</option>
+                                                    <option>مادة قرائية</option>
+                                                    <option>فيديو تعليمي</option>
+                                                    <option>اختبار</option>
+                                                    <option>دراسة حالة</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="target-audience" class="form-label">الفئة المستهدفة</label>
+                                                <select class="form-select" id="target-audience">
+                                                    <option selected>اختر الفئة المستهدفة</option>
+                                                    <option>الموظفون الجدد</option>
+                                                    <option>المديرون</option>
+                                                    <option>الفريق الفني</option>
+                                                    <option>فريق المبيعات</option>
+                                                    <option>جميع الموظفين</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="difficulty-level" class="form-label">مستوى الصعوبة</label>
+                                                <select class="form-select" id="difficulty-level">
+                                                    <option selected>اختر مستوى الصعوبة</option>
+                                                    <option>مبتدئ</option>
+                                                    <option>متوسط</option>
+                                                    <option>متقدم</option>
+                                                    <option>خبير</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="content-description" class="form-label">وصف المحتوى</label>
+                                            <textarea class="form-control" id="content-description" rows="3" placeholder="صف المحتوى التدريبي المطلوب"></textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="key-topics" class="form-label">المواضيع الرئيسية</label>
+                                            <input type="text" class="form-control" id="key-topics" placeholder="أدخل المواضيع الرئيسية مفصولة بفواصل">
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary" onclick="generateContent()">
+                                                <i class="fas fa-magic me-2"></i>توليد المحتوى
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">معاينة المحتوى المولد</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="generated-content" class="d-none">
+                                        <div class="alert alert-success">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            تم إنشاء المحتوى بنجاح باستخدام Gemini API
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <h4>مقدمة في إدارة المشاريع</h4>
+                                            <p class="text-muted">نوع المحتوى: عرض تقديمي | الفئة المستهدفة: المديرون | مستوى الصعوبة: متوسط</p>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <h5>محتويات العرض التقديمي:</h5>
+                                            <ol>
+                                                <li>مفهوم إدارة المشاريع وأهميتها</li>
+                                                <li>دورة حياة المشروع</li>
+                                                <li>أدوات وتقنيات إدارة المشاريع</li>
+                                                <li>إدارة المخاطر في المشاريع</li>
+                                                <li>تقييم نجاح المشروع</li>
+                                            </ol>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <h5>المحتوى التفصيلي:</h5>
+                                            <div class="border rounded p-3 bg-light">
+                                                <h6>الشريحة 1: مفهوم إدارة المشاريع</h6>
+                                                <p>إدارة المشاريع هي تطبيق المعرفة والمهارات والأدوات والتقنيات على أنشطة المشروع لتحقيق متطلبات المشروع...</p>
+                                                
+                                                <h6 class="mt-3">الشريحة 2: دورة حياة المشروع</h6>
+                                                <p>تتكون دورة حياة المشروع من عدة مراحل رئيسية: البدء، التخطيط، التنفيذ، المراقبة، والإغلاق...</p>
+                                                
+                                                <h6 class="mt-3">الشريحة 3: أدوات وتقنيات إدارة المشاريع</h6>
+                                                <p>تشمل الأدوات الشائعة في إدارة المشاريع: مخطط جانت، تحليل المسار الحرج، مخطط بيرت...</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button class="btn btn-success">
+                                                <i class="fas fa-save me-2"></i>حفظ المحتوى
+                                            </button>
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-edit me-2"></i>تعديل المحتوى
+                                            </button>
+                                            <button class="btn btn-warning">
+                                                <i class="fas fa-download me-2"></i>تحميل كملف
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="no-content-message" class="text-center py-5">
+                                        <i class="fas fa-file-alt fa-4x text-muted mb-3"></i>
+                                        <h5>لم يتم إنشاء محتوى بعد</h5>
+                                        <p class="text-muted">استخدم النموذج أعلاه لإنشاء محتوى تدريبي مخصص</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Effectiveness Section -->
+                <div id="effectiveness" class="content-section">
+                    <h2 class="mb-4">تحليل فعالية البرامج التدريبية</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">تقييم فعالية التدريب</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-md-4">
+                                            <div class="card border-primary">
+                                                <div class="card-body text-center">
+                                                    <h5>رضا المتدربين</h5>
+                                                    <h2 class="text-primary">87%</h2>
+                                                    <div class="progress mt-2">
+                                                        <div class="progress-bar bg-primary" style="width: 87%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-success">
+                                                <div class="card-body text-center">
+                                                    <h5>اكتساب المهارات</h5>
+                                                    <h2 class="text-success">78%</h2>
+                                                    <div class="progress mt-2">
+                                                        <div class="progress-bar bg-success" style="width: 78%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning">
+                                                <div class="card-body text-center">
+                                                    <h5>تطبيق المهارات</h5>
+                                                    <h2 class="text-warning">65%</h2>
+                                                    <div class="progress mt-2">
+                                                        <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <h5 class="mb-3">مؤشرات الأداء الرئيسية</h5>
+                                            <div class="chart-container">
+                                                <canvas id="kpiChart"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h5 class="mb-3">اقتراحات التحسين</h5>
+                                            <div class="list-group">
+                                                <div class="list-group-item">
+                                                    <h6 class="mb-1">زيادة الجانب العملي</h6>
+                                                    <p class="mb-1 small text-muted">إضافة المزيد من التمارين العملية والتطبيقات الواقعية</p>
+                                                    <span class="badge bg-warning">أولوية عالية</span>
+                                                </div>
+                                                <div class="list-group-item">
+                                                    <h6 class="mb-1">تخصيص المحتوى</h6>
+                                                    <p class="mb-1 small text-muted">تطوير محتوى أكثر تخصيصاً حسب احتياجات الأقسام</p>
+                                                    <span class="badge bg-primary">أولوية متوسطة</span>
+                                                </div>
+                                                <div class="list-group-item">
+                                                    <h6 class="mb-1">متابعة ما بعد التدريب</h6>
+                                                    <p class="mb-1 small text-muted">إنشاء نظام لمتابعة تطبيق المهارات بعد التدريب</p>
+                                                    <span class="badge bg-success">أولوية منخفضة</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h5 class="mb-3">تقييم البرامج التدريبية</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>البرنامج التدريبي</th>
+                                                        <th>عدد المتدربين</th>
+                                                        <th>متوسط التقييم</th>
+                                                        <th>نسبة الإكمال</th>
+                                                        <th>العائد على الاستثمار</th>
+                                                        <th>الإجراءات</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>إدارة المشاريع الاحترافية</td>
+                                                        <td>45</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="me-2">4.2</span>
+                                                                <div class="progress" style="width: 100px; height: 8px;">
+                                                                    <div class="progress-bar bg-success" style="width: 84%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>92%</td>
+                                                        <td>180%</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="viewProgramDetails('إدارة المشاريع الاحترافية')">
+                                                                <i class="fas fa-eye me-1"></i>تفاصيل
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>المهارات القيادية</td>
+                                                        <td>32</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="me-2">3.8</span>
+                                                                <div class="progress" style="width: 100px; height: 8px;">
+                                                                    <div class="progress-bar bg-warning" style="width: 76%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>85%</td>
+                                                        <td>150%</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="viewProgramDetails('المهارات القيادية')">
+                                                                <i class="fas fa-eye me-1"></i>تفاصيل
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>الأمن السيبراني</td>
+                                                        <td>28</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="me-2">4.5</span>
+                                                                <div class="progress" style="width: 100px; height: 8px;">
+                                                                    <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>96%</td>
+                                                        <td>220%</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary" onclick="viewProgramDetails('الأمن السيبراني')">
+                                                                <i class="fas fa-eye me-1"></i>تفاصيل
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificates Section -->
+                <div id="certificates" class="content-section">
+                    <h2 class="mb-4">نظام الشهادات المهنية</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">الشهادات المهنية للموظفين</h5>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCertificateModal">
+                                        <i class="fas fa-plus me-2"></i>إضافة شهادة
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="certificate-card">
+                                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                                    <div>
+                                                        <h5>PMP</h5>
+                                                        <p class="text-muted mb-0">إدارة المشاريع الاحترافية</p>
+                                                    </div>
+                                                    <i class="fas fa-certificate fa-2x text-primary"></i>
+                                                </div>
+                                                <p><strong>الحاصل على الشهادة:</strong> أحمد محمد</p>
+                                                <p><strong>تاريخ الإصدار:</strong> 15/03/2022</p>
+                                                <p><strong>تاريخ الانتهاء:</strong> 15/03/2025</p>
+                                                <span class="certificate-status status-valid">سارية</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="certificate-card">
+                                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                                    <div>
+                                                        <h5>CISA</h5>
+                                                        <p class="text-muted mb-0">مراقبة أنظمة المعلومات</p>
+                                                    </div>
+                                                    <i class="fas fa-certificate fa-2x text-success"></i>
+                                                </div>
+                                                <p><strong>الحاصل على الشهادة:</strong> فاطمة علي</p>
+                                                <p><strong>تاريخ الإصدار:</strong> 10/06/2021</p>
+                                                <p><strong>تاريخ الانتهاء:</strong> 10/06/2024</p>
+                                                <span class="certificate-status status-expiring">تنتهي قريباً</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="certificate-card">
+                                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                                    <div>
+                                                        <h5>CISSP</h5>
+                                                        <p class="text-muted mb-0">أمن أنظمة المعلومات</p>
+                                                    </div>
+                                                    <i class="fas fa-certificate fa-2x text-warning"></i>
+                                                </div>
+                                                <p><strong>الحاصل على الشهادة:</strong> خالد سالم</p>
+                                                <p><strong>تاريخ الإصدار:</strong> 05/09/2020</p>
+                                                <p><strong>تاريخ الانتهاء:</strong> 05/09/2023</p>
+                                                <span class="certificate-status status-expired">منتهية</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h5 class="mb-3">تنبيهات التجديد</h5>
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            <strong>3 شهادات</strong> ستنتهي صلاحيتها خلال الـ 90 يوم القادمة
+                                        </div>
+                                        
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>الشهادة</th>
+                                                        <th>الموظف</th>
+                                                        <th>تاريخ الانتهاء</th>
+                                                        <th>الأيام المتبقية</th>
+                                                        <th>الحالة</th>
+                                                        <th>الإجراءات</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>CISA</td>
+                                                        <td>فاطمة علي</td>
+                                                        <td>10/06/2024</td>
+                                                        <td>45 يوم</td>
+                                                        <td><span class="badge bg-warning">قريبة الانتهاء</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary">
+                                                                <i class="fas fa-bell me-1"></i>إرسال تنبيه
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ITIL</td>
+                                                        <td>مريم عبدالله</td>
+                                                        <td>25/07/2024</td>
+                                                        <td>90 يوم</td>
+                                                        <td><span class="badge bg-info">تحت المراقبة</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary">
+                                                                <i class="fas fa-bell me-1"></i>إرسال تنبيه
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CEH</td>
+                                                        <td>يوسف أحمد</td>
+                                                        <td>15/08/2024</td>
+                                                        <td>110 يوم</td>
+                                                        <td><span class="badge bg-success">سارية</span></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary">
+                                                                <i class="fas fa-bell-slash me-1"></i>إلغاء التنبيه
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Analysis Section -->
+                <div id="impact-analysis" class="content-section">
+                    <h2 class="mb-4">تحليل تأثير التدريب على أداء الموظفين</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">لوحة تحليل التأثير</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-md-3">
+                                            <div class="stat-card primary">
+                                                <i class="fas fa-chart-line"></i>
+                                                <h3>+24%</h3>
+                                                <p>تحسين الإنتاجية</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-card success">
+                                                <i class="fas fa-trophy"></i>
+                                                <h3>+18%</h3>
+                                                <p>تحسين الجودة</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-card warning">
+                                                <i class="fas fa-user-check"></i>
+                                                <h3>+32%</h3>
+                                                <p>رضا العملاء</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="stat-card danger">
+                                                <i class="fas fa-dollar-sign"></i>
+                                                <h3>215%</h3>
+                                                <p>العائد على الاستثمار</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">مقارنة الأداء قبل وبعد التدريب</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-container">
+                                                        <canvas id="performanceComparisonChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">تأثير التدريب حسب القسم</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-container">
+                                                        <canvas id="departmentImpactChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">أكثر البرامج تأثيراً</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-medal fa-2x text-warning"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6>إدارة المشاريع</h6>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar bg-success" style="width: 95%"></div>
+                                                            </div>
+                                                            <small class="text-muted">تأثير: 95%</small>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-medal fa-2x text-primary"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6>المهارات القيادية</h6>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar bg-primary" style="width: 85%"></div>
+                                                            </div>
+                                                            <small class="text-muted">تأثير: 85%</small>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <i class="fas fa-medal fa-2x text-success"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6>تحليل البيانات</h6>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar bg-success" style="width: 80%"></div>
+                                                            </div>
+                                                            <small class="text-muted">تأثير: 80%</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h6 class="mb-0">توصيات لتحسين التأثير</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3">
+                                                            <i class="fas fa-lightbulb text-warning me-2"></i>
+                                                            <span>زيادة التدريب العملي للمهارات التقنية</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <i class="fas fa-lightbulb text-primary me-2"></i>
+                                                            <span>تطوير برامج تدريبية مخصصة للأقسام</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <i class="fas fa-lightbulb text-success me-2"></i>
+                                                            <span>إنشاء نظام مكافآت لتطبيق المهارات</span>
+                                                        </li>
+                                                        <li>
+                                                            <i class="fas fa-lightbulb text-danger me-2"></i>
+                                                            <span>تحسين متابعة ما بعد التدريب</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentorship Section -->
+                <div id="mentorship" class="content-section">
+                    <h2 class="mb-4">نظام الإرشاد والتوجيه</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">إدارة برنامج الإرشاد</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="mentorshipTabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="mentors-tab" data-bs-toggle="tab" data-bs-target="#mentors" type="button">المرشدون</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="mentees-tab" data-bs-toggle="tab" data-bs-target="#mentees" type="button">المسترشدون</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="sessions-tab" data-bs-toggle="tab" data-bs-target="#sessions" type="button">جلسات الإرشاد</button>
+                                        </li>
+                                    </ul>
+                                    
+                                    <div class="tab-content" id="mentorshipTabsContent">
+                                        <div class="tab-pane fade show active" id="mentees" role="tabpanel">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6>الموظفون المحتاجون للإرشاد</h6>
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenteeModal">
+                                                    <i class="fas fa-plus me-1"></i>إضافة مسترشد
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>الموظف</th>
+                                                            <th>القسم</th>
+                                                            <th>احتياجات التطوير</th>
+                                                            <th>المرشد الحالي</th>
+                                                            <th>الحالة</th>
+                                                            <th>الإجراءات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>أحمد محمد</td>
+                                                            <td>تقنية المعلومات</td>
+                                                            <td>المهارات القيادية</td>
+                                                            <td>سامي خالد</td>
+                                                            <td><span class="badge bg-success">نشط</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-eye me-1"></i>عرض
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>فاطمة علي</td>
+                                                            <td>المالية</td>
+                                                            <td>التخطيط الاستراتيجي</td>
+                                                            <td>-</td>
+                                                            <td><span class="badge bg-warning">يحتاج مرشد</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-user-plus me-1"></i>تعيين مرشد
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>خالد سالم</td>
+                                                            <td>الموارد البشرية</td>
+                                                            <td>إدارة التغيير</td>
+                                                            <td>نورة أحمد</td>
+                                                            <td><span class="badge bg-success">نشط</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-eye me-1"></i>عرض
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tab-pane fade" id="mentors" role="tabpanel">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6>المرشدون المتاحون</h6>
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMentorModal">
+                                                    <i class="fas fa-plus me-1"></i>إضافة مرشد
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mentor-card">
+                                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="مرشد" class="mentor-avatar">
+                                                        <div class="mentor-info">
+                                                            <h5>سامي خالد</h5>
+                                                            <p>مدير تنفيذي | تقنية المعلومات</p>
+                                                            <div>
+                                                                <span class="mentor-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star-half-alt"></i>
+                                                                </span>
+                                                                <span>4.5 (12 تقييم)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="mentor-card">
+                                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="مرشد" class="mentor-avatar">
+                                                        <div class="mentor-info">
+                                                            <h5>نورة أحمد</h5>
+                                                            <p>مديرة الموارد البشرية</p>
+                                                            <div>
+                                                                <span class="mentor-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span>5.0 (8 تقييم)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="mentor-card">
+                                                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="مرشد" class="mentor-avatar">
+                                                        <div class="mentor-info">
+                                                            <h5>عبدالله محمد</h5>
+                                                            <p>مدير المالية</p>
+                                                            <div>
+                                                                <span class="mentor-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="far fa-star"></i>
+                                                                </span>
+                                                                <span>4.0 (6 تقييم)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="mentor-card">
+                                                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="مرشد" class="mentor-avatar">
+                                                        <div class="mentor-info">
+                                                            <h5>سارة علي</h5>
+                                                            <p>مديرة التسويق</p>
+                                                            <div>
+                                                                <span class="mentor-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star-half-alt"></i>
+                                                                </span>
+                                                                <span>4.7 (9 تقييم)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tab-pane fade" id="sessions" role="tabpanel">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6>جلسات الإرشاد القادمة</h6>
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addSessionModal">
+                                                    <i class="fas fa-plus me-1"></i>جدولة جلسة
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>المرشد</th>
+                                                            <th>المسترشد</th>
+                                                            <th>الموضوع</th>
+                                                            <th>التاريخ والوقت</th>
+                                                            <th>الحالة</th>
+                                                            <th>الإجراءات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>سامي خالد</td>
+                                                            <td>أحمد محمد</td>
+                                                            <td>تطوير المهارات القيادية</td>
+                                                            <td>20 مايو 2023 - 10:00 ص</td>
+                                                            <td><span class="badge bg-primary">مجدول</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-edit me-1"></i>تعديل
+                                                                </button>
+                                                                <button class="btn btn-sm btn-danger">
+                                                                    <i class="fas fa-times me-1"></i>إلغاء
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>نورة أحمد</td>
+                                                            <td>خالد سالم</td>
+                                                            <td>إدارة التغيير</td>
+                                                            <td>22 مايو 2023 - 2:00 م</td>
+                                                            <td><span class="badge bg-primary">مجدول</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-edit me-1"></i>تعديل
+                                                                </button>
+                                                                <button class="btn btn-sm btn-danger">
+                                                                    <i class="fas fa-times me-1"></i>إلغاء
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>عبدالله محمد</td>
+                                                            <td>مريم عبدالله</td>
+                                                            <td>التخطيط المالي</td>
+                                                            <td>25 مايو 2023 - 11:00 ص</td>
+                                                            <td><span class="badge bg-success">مكتمل</span></td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-file-alt me-1"></i>التقرير
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">إحصائيات الإرشاد</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container mb-4" style="height: 200px;">
+                                        <canvas id="mentorshipStatsChart"></canvas>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div>
+                                            <h6>إجمالي المرشدين</h6>
+                                            <h3 class="text-primary">12</h3>
+                                        </div>
+                                        <div>
+                                            <h6>إجمالي المسترشدين</h6>
+                                            <h3 class="text-success">24</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6>جلسات هذا الشهر</h6>
+                                            <h3 class="text-warning">18</h3>
+                                        </div>
+                                        <div>
+                                            <h6>معدل الرضا</h6>
+                                            <h3 class="text-danger">4.6</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                    <h5 class="mb-0">الموارد التعليمية</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-book fa-2x text-primary me-3"></i>
+                                        <div>
+                                            <h6>دليل الإرشاد الفعال</h6>
+                                            <p class="mb-0 text-muted small">دليل شامل للمرشدين والمسترشدين</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-video fa-2x text-success me-3"></i>
+                                        <div>
+                                            <h6>فيديوهات تدريبية</h6>
+                                            <p class="mb-0 text-muted small">مجموعة من الفيديوهات التعليمية</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-alt fa-2x text-warning me-3"></i>
+                                        <div>
+                                            <h6>نماذج التقييم</h6>
+                                            <p class="mb-0 text-muted small">نماذج لتقييم جلسات الإرشاد</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Certificate Modal -->
+    <div class="modal fade" id="addCertificateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة شهادة جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="cert-name" class="form-label">اسم الشهادة</label>
+                            <input type="text" class="form-control" id="cert-name" placeholder="أدخل اسم الشهادة">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cert-employee" class="form-label">الموظف</label>
+                            <select class="form-select" id="cert-employee">
+                                <option selected>اختر الموظف...</option>
+                                <option>أحمد محمد</option>
+                                <option>فاطمة علي</option>
+                                <option>خالد سالم</option>
+                                <option>مريم عبدالله</option>
+                                <option>يوسف أحمد</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cert-issue-date" class="form-label">تاريخ الإصدار</label>
+                            <input type="date" class="form-control" id="cert-issue-date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cert-expiry-date" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" class="form-control" id="cert-expiry-date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cert-issuer" class="form-label">الجهة المانحة</label>
+                            <input type="text" class="form-control" id="cert-issuer" placeholder="أدخل اسم الجهة المانحة">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">حفظ الشهادة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Mentee Modal -->
+    <div class="modal fade" id="addMenteeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة مسترشد جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="mentee-name" class="form-label">اسم الموظف</label>
+                            <input type="text" class="form-control" id="mentee-name" placeholder="أدخل اسم الموظف">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentee-dept" class="form-label">القسم</label>
+                            <select class="form-select" id="mentee-dept">
+                                <option selected>اختر القسم...</option>
+                                <option>تقنية المعلومات</option>
+                                <option>الموارد البشرية</option>
+                                <option>التسويق</option>
+                                <option>المالية</option>
+                                <option>العمليات</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentee-needs" class="form-label">احتياجات التطوير</label>
+                            <textarea class="form-control" id="mentee-needs" rows="3" placeholder="صف احتياجات التطوير"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentee-goals" class="form-label">الأهداف المرجوة</label>
+                            <textarea class="form-control" id="mentee-goals" rows="3" placeholder="صف الأهداف المرجوة من الإرشاد"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">إضافة مسترشد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Mentor Modal -->
+    <div class="modal fade" id="addMentorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة مرشد جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="mentor-name" class="form-label">اسم المرشد</label>
+                            <input type="text" class="form-control" id="mentor-name" placeholder="أدخل اسم المرشد">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentor-position" class="form-label">المنصب</label>
+                            <input type="text" class="form-control" id="mentor-position" placeholder="أدخل المنصب الوظيفي">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentor-expertise" class="form-label">مجالات الخبرة</label>
+                            <input type="text" class="form-control" id="mentor-expertise" placeholder="أدخل مجالات الخبرة مفصولة بفواصل">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentor-availability" class="form-label">المدة المتاحة للأرشاد</label>
+                            <select class="form-select" id="mentor-availability">
+                                <option selected>اختر المدة...</option>
+                                <option>ساعة أسبوعياً</option>
+                                <option>ساعتان أسبوعياً</option>
+                                <option>3 ساعات أسبوعياً</option>
+                                <option>حسب الحاجة</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">إضافة مرشد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Session Modal -->
+    <div class="modal fade" id="addSessionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">جدولة جلسة إرشاد جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="session-mentor" class="form-label">المرشد</label>
+                            <select class="form-select" id="session-mentor">
+                                <option selected>اختر المرشد...</option>
+                                <option>سامي خالد</option>
+                                <option>نورة أحمد</option>
+                                <option>عبدالله محمد</option>
+                                <option>سارة علي</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="session-mentee" class="form-label">المسترشد</label>
+                            <select class="form-select" id="session-mentee">
+                                <option selected>اختر المسترشد...</option>
+                                <option>أحمد محمد</option>
+                                <option>فاطمة علي</option>
+                                <option>خالد سالم</option>
+                                <option>مريم عبدالله</option>
+                                <option>يوسف أحمد</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="session-topic" class="form-label">موضوع الجلسة</label>
+                            <input type="text" class="form-control" id="session-topic" placeholder="أدخل موضوع الجلسة">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="session-date" class="form-label">التاريخ</label>
+                                <input type="date" class="form-control" id="session-date">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="session-time" class="form-label">الوقت</label>
+                                <input type="time" class="form-control" id="session-time">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="session-duration" class="form-label">المدة</label>
+                            <select class="form-select" id="session-duration">
+                                <option selected>اختر المدة...</option>
+                                <option>30 دقيقة</option>
+                                <option>ساعة</option>
+                                <option>ساعة ونصف</option>
+                                <option>ساعتان</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">جدولة الجلسة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notification-message"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSection = this.getAttribute('data-section');
+                    showSection(targetSection);
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Handle sidebar clicks
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetSection = this.getAttribute('data-section');
+                    showSection(targetSection);
+                    
+                    // Update active sidebar item
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const correspondingNavLink = document.querySelector(`.navbar-nav .nav-link[data-section="${targetSection}"]`);
+                    if (correspondingNavLink) {
+                        correspondingNavLink.classList.add('active');
+                    }
+                });
+            });
+            
+            function showSection(sectionId) {
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            }
+            
+            // Initialize charts
+            initializeCharts();
+        });
+        
+        // Initialize all charts
+        function initializeCharts() {
+            // Training Progress Chart
+            const trainingProgressCtx = document.getElementById('trainingProgressChart').getContext('2d');
+            new Chart(trainingProgressCtx, {
+                type: 'line',
+                data: {
+                    labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                    datasets: [{
+                        label: 'عدد المتدربين',
+                        data: [65, 78, 90, 81, 96, 105],
+                        borderColor: '#4361ee',
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'الدورات المكتملة',
+                        data: [28, 35, 42, 38, 45, 52],
+                        borderColor: '#4caf50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+            
+            // KPI Chart
+            const kpiCtx = document.getElementById('kpiChart').getContext('2d');
+            new Chart(kpiCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['رضا المتدربين', 'اكتساب المهارات', 'تطبيق المهارات', 'تحسين الإنتاجية', 'تحسين الجودة'],
+                    datasets: [{
+                        label: 'قبل التدريب',
+                        data: [65, 59, 50, 65, 56],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    }, {
+                        label: 'بعد التدريب',
+                        data: [87, 78, 65, 85, 74],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // Performance Comparison Chart
+            const performanceComparisonCtx = document.getElementById('performanceComparisonChart').getContext('2d');
+            new Chart(performanceComparisonCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['الإنتاجية', 'الجودة', 'الابتكار', 'التعاون', 'الرضا الوظيفي', 'الاحتفاظ بالموظفين'],
+                    datasets: [{
+                        label: 'قبل التدريب',
+                        data: [60, 55, 40, 65, 50, 70],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    }, {
+                        label: 'بعد التدريب',
+                        data: [85, 80, 75, 90, 85, 88],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // Department Impact Chart
+            const departmentImpactCtx = document.getElementById('departmentImpactChart').getContext('2d');
+            new Chart(departmentImpactCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['تقنية المعلومات', 'الموارد البشرية', 'المالية', 'التسويق', 'العمليات'],
+                    datasets: [{
+                        data: [30, 20, 15, 25, 10],
+                        backgroundColor: [
+                            'rgba(67, 97, 238, 0.8)',
+                            'rgba(76, 175, 80, 0.8)',
+                            'rgba(255, 152, 0, 0.8)',
+                            'rgba(244, 67, 54, 0.8)',
+                            'rgba(156, 39, 176, 0.8)'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+            
+            // Mentorship Stats Chart
+            const mentorshipStatsCtx = document.getElementById('mentorshipStatsChart').getContext('2d');
+            new Chart(mentorshipStatsCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['نشط', 'مكتمل', 'ملغى', 'مجدول'],
+                    datasets: [{
+                        data: [12, 8, 2, 5],
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.8)',
+                            'rgba(67, 97, 238, 0.8)',
+                            'rgba(244, 67, 54, 0.8)',
+                            'rgba(255, 152, 0, 0.8)'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            notification.className = 'notification ' + type;
+            notificationMessage.textContent = message;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Analyze gaps function
+        function analyzeGaps() {
+            showNotification('جاري تحليل الفجوات المعرفية باستخدام Gemini API...', 'info');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('gap-analysis-results').style.display = 'block';
+                showNotification('تم تحليل الفجوات المعرفية بنجاح!', 'success');
+            }, 2000);
+        }
+        
+        // Show course recommendation
+        function showCourseRecommendation(skill) {
+            showNotification(`جاري تحضير توصيات الدورات التدريبية لـ "${skill}"...`, 'info');
+            
+            // Simulate API call
+            setTimeout(() => {
+                showNotification(`تم إعداد توصيات الدورات التدريبية لـ "${skill}"`, 'success');
+            }, 1500);
+        }
+        
+        // Generate training path
+        function generateTrainingPath() {
+            const employeeName = document.getElementById('employee-name').value;
+            const employeePosition = document.getElementById('employee-position').value;
+            
+            if (!employeeName || !employeePosition) {
+                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            showNotification('جاري إنشاء المسار التدريبي المخصص...', 'info');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('training-path-view').classList.remove('d-none');
+                document.getElementById('no-path-message').classList.add('d-none');
+                showNotification('تم إنشاء المسار التدريبي بنجاح!', 'success');
+            }, 2000);
+        }
+        
+        // Generate content
+        function generateContent() {
+            const contentTitle = document.getElementById('content-title').value;
+            const contentType = document.getElementById('content-type').value;
+            
+            if (!contentTitle || contentType === 'اختر نوع المحتوى') {
+                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            showNotification('جاري توليد المحتوى التدريبي باستخدام Gemini API...', 'info');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('generated-content').classList.remove('d-none');
+                document.getElementById('no-content-message').classList.add('d-none');
+                showNotification('تم توليد المحتوى التدريبي بنجاح!', 'success');
+            }, 2500);
+        }
+        
+        // View program details
+        function viewProgramDetails(programName) {
+            showNotification(`جاري تحميل تفاصيل برنامج "${programName}"...`, 'info');
+            
+            // Simulate loading
+            setTimeout(() => {
+                showNotification(`تم تحميل تفاصيل برنامج "${programName}"`, 'success');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
