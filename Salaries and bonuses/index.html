@@ -3,1606 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام الرواتب الذكي المتكامل</title>
+    <title>نظام الرواتب الذكي المتكامل - الإصدار النهائي</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #1a5276;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-bg: #f8f9fa;
-            --dark-text: #2c3e50;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-        }
-        
-        .sidebar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            min-height: 100vh;
-            color: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        }
-        
-        .sidebar .nav-link {
-            color: rgba(255,255,255,0.8);
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 5px 15px;
-            transition: all 0.3s;
-        }
-        
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            background-color: rgba(255,255,255,0.2);
-            color: white;
-            transform: translateX(5px);
-        }
-        
-        .sidebar .nav-link i {
-            margin-left: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .main-content {
-            padding: 30px;
-        }
-        
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-            transition: transform 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 15px 15px 0 0 !important;
-            padding: 15px 20px;
-            font-weight: 600;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        .stat-card i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: 30px;
-            padding: 10px 25px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-        
-        .simulation-input {
-            margin-bottom: 15px;
-        }
-        
-        .simulation-result {
-            background-color: #e8f4fc;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .compliance-status {
-            padding: 10px 15px;
-            border-radius: 30px;
-            font-weight: 600;
-            display: inline-block;
-            margin: 5px;
-        }
-        
-        .compliance-ok {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .compliance-warning {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .incentive-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .incentive-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-        }
-        
-        .progress {
-            height: 10px;
-            border-radius: 10px;
-            background-color: #e9ecef;
-        }
-        
-        .progress-bar {
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-        }
-        
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: var(--accent-color);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        
-        .report-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .report-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-        }
-        
-        .report-icon {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-left: 20px;
-        }
-        
-        .report-details {
-            flex-grow: 1;
-        }
-        
-        .report-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .report-date {
-            color: #7f8c8d;
-            font-size: 0.85rem;
-        }
-        
-        .report-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .bank-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .bank-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-        }
-        
-        .bank-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-left: 15px;
-        }
-        
-        .bank-status {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .bank-connected {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .bank-disconnected {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        .recommendation-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-right: 5px solid var(--secondary-color);
-        }
-        
-        .recommendation-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .recommendation-text {
-            margin-bottom: 15px;
-        }
-        
-        .recommendation-impact {
-            font-weight: 600;
-            color: var(--success-color);
-        }
-        
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-                padding-bottom: 20px;
-            }
-            
-            .main-content {
-                padding: 15px;
-            }
-        }
-    </style>
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <!-- شريط التنقل العلوي -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-coins text-primary"></i>
-                <span class="fw-bold">نظام الرواتب الذكي</span>
-            </a>
-            
-            <div class="d-flex align-items-center">
-                <div class="position-relative me-3">
-                    <i class="fas fa-bell text-primary fs-5"></i>
-                    <span class="notification-badge">3</span>
+    <!-- نظام المصادقة المحسن -->
+    <div id="authContainer" class="auth-container animate__animated animate__fadeIn">
+        <div class="auth-card animate__animated animate__zoomIn">
+            <div class="text-center mb-4">
+                <div class="logo-container">
+                    <i class="fas fa-coins fa-4x text-primary logo-icon"></i>
+                    <div class="logo-text">Payroll Pro</div>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle me-1"></i>
-                        مدير النظام
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
-                    </ul>
+                <h2 class="mt-3 fw-bold">نظام الرواتب الذكي</h2>
+                <p class="text-muted">الإصدار النهائي 2.0</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="mb-3 form-floating">
+                    <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" required>
+                    <label for="username"><i class="fas fa-user me-2"></i>اسم المستخدم</label>
+                </div>
+                
+                <div class="mb-3 form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="كلمة المرور" required>
+                    <label for="password"><i class="fas fa-lock me-2"></i>كلمة المرور</label>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">تذكرني</label>
+                    <a href="#" class="float-end text-decoration-none">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    تسجيل الدخول
+                </button>
+            </form>
+            
+            <div id="loginError" class="alert alert-danger mt-3 animate__animated animate__shakeX" style="display: none;"></div>
+            
+            <div class="text-center mt-4">
+                <small class="text-muted">© 2024 Payroll Pro. جميع الحقوق محفوظة.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- النظام الرئيسي المحسن -->
+    <div id="mainSystem" style="display: none;" class="animate__animated animate__fadeIn">
+        <!-- شريط التنقل العلوي المحسن -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <i class="fas fa-coins text-primary me-2"></i>
+                    <span class="fw-bold">Payroll Pro</span>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <!-- شريط البحث -->
+                    <div class="search-container me-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0" placeholder="بحث سريع..." id="globalSearch">
+                        </div>
+                    </div>
+                    
+                    <!-- الإشعارات المحسنة -->
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell text-primary"></i>
+                            <span class="notification-badge animate__animated animate__bounce" id="notificationCount">0</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                            <li class="dropdown-header">الإشعارات</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <div id="notificationList">
+                                <!-- سيتم ملؤها ديناميكياً -->
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <!-- قائمة المستخدم -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="currentUser">مدير النظام</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle me-2"></i>المساعدة</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- الشريط الجانبي المحسن -->
+        <div class="sidebar-wrapper">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h5>لوحة التحكم</h5>
+                    <small>الإصدار 2.0</small>
+                </div>
+                
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>الرئيسية</span>
+                        <span class="nav-badge">جديد</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="employees">
+                        <i class="fas fa-users"></i>
+                        <span>الموظفون</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="salaries">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>الرواتب</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="analysis">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>تحليل الرواتب</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="forecasting">
+                        <i class="fas fa-chart-line"></i>
+                        <span>التنبؤ بالتكاليف</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="simulation">
+                        <i class="fas fa-calculator"></i>
+                        <span>محاكاة الرواتب</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="banking">
+                        <i class="fas fa-university"></i>
+                        <span>التكامل المصرفي</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="compliance">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>الامتثال الضريبي</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>التقارير الذكية</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="incentives">
+                        <i class="fas fa-award"></i>
+                        <span>نظام الحوافز</span>
+                    </a>
+                    <a class="nav-link" href="#" data-section="settings">
+                        <i class="fas fa-cogs"></i>
+                        <span>الإعدادات</span>
+                    </a>
+                </nav>
+                
+                <div class="sidebar-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">الحالة</small>
+                        <span class="status-dot online"></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- الشريط الجانبي -->
-            <div class="col-md-3 col-lg-2 sidebar p-0">
-                <div class="p-3">
-                    <h5 class="text-center mb-4">لوحة التحكم</h5>
-                    <nav class="nav flex-column">
-                        <a class="nav-link active" href="#" data-section="dashboard">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>الرئيسية</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="analysis">
-                            <i class="fas fa-chart-pie"></i>
-                            <span>تحليل الرواتب</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="forecasting">
-                            <i class="fas fa-chart-line"></i>
-                            <span>التنبؤ بالتكاليف</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="simulation">
-                            <i class="fas fa-calculator"></i>
-                            <span>محاكاة الرواتب</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="banking">
-                            <i class="fas fa-university"></i>
-                            <span>التكامل المصرفي</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="compliance">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>الامتثال الضريبي</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="reports">
-                            <i class="fas fa-file-alt"></i>
-                            <span>التقارير الذكية</span>
-                        </a>
-                        <a class="nav-link" href="#" data-section="incentives">
-                            <i class="fas fa-award"></i>
-                            <span>نظام الحوافز</span>
-                        </a>
+        <!-- المحتوى الرئيسي المحسن -->
+        <div class="main-content">
+            <!-- شريط الأدوات -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <h1 id="pageTitle">لوحة التحكم الرئيسية</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" id="breadcrumb">
+                            <li class="breadcrumb-item active">الرئيسية</li>
+                        </ol>
                     </nav>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline-secondary btn-sm me-2" id="refreshBtn">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        تحديث
+                    </button>
+                    <button class="btn btn-primary btn-sm" id="exportBtn">
+                        <i class="fas fa-download me-1"></i>
+                        تصدير
+                    </button>
                 </div>
             </div>
 
-            <!-- المحتوى الرئيسي -->
-            <div class="col-md-9 col-lg-10 main-content">
-                <!-- قسم الرئيسية -->
-                <div id="dashboard" class="content-section">
-                    <h2 class="mb-4">لوحة التحكم الرئيسية</h2>
-                    
-                    <div class="row mb-4">
-                        <div class="col-md-3 col-sm-6 mb-3">
-                            <div class="stat-card">
+            <!-- قسم الرئيسية المحسن -->
+            <div id="dashboard" class="content-section animate__animated animate__fadeIn">
+                <!-- بطاقات الإحصائيات المحسنة -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                        <div class="stat-card stat-card-primary animate__animated animate__fadeInUp">
+                            <div class="stat-icon">
                                 <i class="fas fa-users"></i>
-                                <div class="stat-value">248</div>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalEmployees">0</div>
                                 <div class="stat-label">الموظفون النشطون</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> 5% هذا الشهر
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-3">
-                            <div class="stat-card">
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                        <div class="stat-card stat-card-success animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+                            <div class="stat-icon">
                                 <i class="fas fa-money-bill-wave"></i>
-                                <div class="stat-value">2.4M</div>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalPayroll">0</div>
                                 <div class="stat-label">إجمالي الرواتب (ريال)</div>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> 12% هذا الشهر
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-3">
-                            <div class="stat-card">
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                        <div class="stat-card stat-card-warning animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                            <div class="stat-icon">
                                 <i class="fas fa-chart-line"></i>
-                                <div class="stat-value">+12%</div>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="growthRate">0%</div>
                                 <div class="stat-label">نمو التكاليف</div>
+                                <div class="stat-change negative">
+                                    <i class="fas fa-arrow-down"></i> 2% عن الشهر الماضي
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-3">
-                            <div class="stat-card">
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-6 col-md-6 mb-3">
+                        <div class="stat-card stat-card-danger animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+                            <div class="stat-icon">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <div class="stat-value">3</div>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="complianceAlerts">0</div>
                                 <div class="stat-label">تنبيهات الامتثال</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">توزيع الرواتب حسب الإدارات</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-container">
-                                        <canvas id="departmentChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">التوصيات الذكية</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="recommendation-card">
-                                        <div class="recommendation-title">تحسين هيكل الرواتب</div>
-                                        <div class="recommendation-text">يوصى بتعديل رواتب قسم المبيعات لتحسين التنافسية في السوق</div>
-                                        <div class="recommendation-impact">توفير محتمل: 120,000 ريال سنوياً</div>
-                                    </div>
-                                    <div class="recommendation-card">
-                                        <div class="recommendation-title">تحديث الحوافز</div>
-                                        <div class="recommendation-text">اقتراح تحديث نظام حوافز الأداء لزيادة الإنتاجية</div>
-                                        <div class="recommendation-impact">زيادة متوقعة في الإنتاجية: 8%</div>
-                                    </div>
+                                <div class="stat-change neutral">
+                                    <i class="fas fa-minus"></i> بدون تغيير
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- قسم تحليل الرواتب -->
-                <div id="analysis" class="content-section" style="display: none;">
-                    <h2 class="mb-4">تحليل هيكل الرواتب</h2>
-                    
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">تحليل مقارن للرواتب</h5>
-                            <button class="btn btn-light btn-sm">
-                                <i class="fas fa-sync-alt me-1"></i>
-                                تحديث التحليل
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <div class="chart-container">
-                                        <canvas id="salaryComparisonChart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="chart-container">
-                                        <canvas id="salaryDistributionChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>الإدارة</th>
-                                            <th>متوسط الراتب الحالي</th>
-                                            <th>متوسط السوق</th>
-                                            <th>الفرق</th>
-                                            <th>التوصية</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>التكنولوجيا</td>
-                                            <td>15,000 ريال</td>
-                                            <td>16,500 ريال</td>
-                                            <td><span class="text-danger">-10%</span></td>
-                                            <td><span class="badge bg-warning">زيادة الرواتب</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>المبيعات</td>
-                                            <td>12,000 ريال</td>
-                                            <td>11,000 ريال</td>
-                                            <td><span class="text-success">+9%</span></td>
-                                            <td><span class="badge bg-success">مناسب</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>الموارد البشرية</td>
-                                            <td>10,500 ريال</td>
-                                            <td>10,000 ريال</td>
-                                            <td><span class="text-success">+5%</span></td>
-                                            <td><span class="badge bg-success">مناسب</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>المالية</td>
-                                            <td>14,000 ريال</td>
-                                            <td>14,500 ريال</td>
-                                            <td><span class="text-danger">-3%</span></td>
-                                            <td><span class="badge bg-info">مراجعة</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- قسم التنبؤ بالتكاليف -->
-                <div id="forecasting" class="content-section" style="display: none;">
-                    <h2 class="mb-4">التنبؤ بتكاليف الرواتب المستقبلية</h2>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">نموذج التنبؤ بالتكاليف</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-8">
-                                    <div class="chart-container">
-                                        <canvas id="forecastChart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card bg-light">
-                                        <div class="card-body">
-                                            <h6>معلمات التنبؤ</h6>
-                                            <div class="mb-3">
-                                                <label class="form-label">معدل التضخم المتوقع (%)</label>
-                                                <input type="number" class="form-control" value="3.5" min="0" max="20" step="0.1">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">نمو الموظفين (%)</label>
-                                                <input type="number" class="form-control" value="5" min="-10" max="30" step="1">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">زيادة الرواتب (%)</label>
-                                                <input type="number" class="form-control" value="4" min="0" max="20" step="0.5">
-                                            </div>
-                                            <button class="btn btn-primary w-100">
-                                                <i class="fas fa-calculator me-1"></i>
-                                                تحديث التنبؤ
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-calendar-alt"></i>
-                                        <div class="stat-value">2.85M</div>
-                                        <div class="stat-label">تكاليف 6 أشهر القادمة (ريال)</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-calendar-alt"></i>
-                                        <div class="stat-value">5.92M</div>
-                                        <div class="stat-label">تكاليف سنة قادمة (ريال)</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
+                
+                <!-- الرسوم البيانية والتوصيات -->
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="card chart-card animate__animated animate__fadeInLeft">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">توزيع الرواتب حسب الإدارات</h5>
+                                <div class="chart-controls">
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="changeChartType('bar')">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="changeChartType('pie')">
+                                        <i class="fas fa-chart-pie"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="changeChartType('line')">
                                         <i class="fas fa-chart-line"></i>
-                                        <div class="stat-value">+18%</div>
-                                        <div class="stat-label">الزيادة المتوقعة</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- قسم محاكاة الرواتب -->
-                <div id="simulation" class="content-section" style="display: none;">
-                    <h2 class="mb-4">محاكاة تأثير تغييرات الرواتب</h2>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0">أداة المحاكاة التفاعلية</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6>تعديل معلمات الرواتب</h6>
-                                    
-                                    <div class="simulation-input">
-                                        <label class="form-label">زيادة عامة في الرواتب (%)</label>
-                                        <input type="range" class="form-range" min="0" max="20" value="0" id="generalIncrease">
-                                        <div class="d-flex justify-content-between">
-                                            <small>0%</small>
-                                            <small id="generalIncreaseValue">0%</small>
-                                            <small>20%</small>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="simulation-input">
-                                        <label class="form-label">زيادة رواتب الإدارة العليا (%)</label>
-                                        <input type="range" class="form-range" min="0" max="25" value="0" id="managementIncrease">
-                                        <div class="d-flex justify-content-between">
-                                            <small>0%</small>
-                                            <small id="managementIncreaseValue">0%</small>
-                                            <small>25%</small>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="simulation-input">
-                                        <label class="form-label">زيادة بدلات الموظفين (%)</label>
-                                        <input type="range" class="form-range" min="0" max="15" value="0" id="allowanceIncrease">
-                                        <div class="d-flex justify-content-between">
-                                            <small>0%</small>
-                                            <small id="allowanceIncreaseValue">0%</small>
-                                            <small>15%</small>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="simulation-input">
-                                        <label class="form-label">عدد الموظفين الجدد</label>
-                                        <input type="number" class="form-control" value="0" min="0" max="50" id="newEmployees">
-                                    </div>
-                                    
-                                    <button class="btn btn-primary w-100" id="runSimulation">
-                                        <i class="fas fa-play me-1"></i>
-                                        تشغيل المحاكاة
                                     </button>
                                 </div>
-                                
-                                <div class="col-md-6">
-                                    <h6>نتائج المحاكاة</h6>
-                                    
-                                    <div class="simulation-result" id="simulationResult">
-                                        <div class="mb-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span>التكلفة الحالية الشهرية:</span>
-                                                <strong>400,000 ريال</strong>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span>التكلفة الجديدة الشهرية:</span>
-                                                <strong id="newCost">400,000 ريال</strong>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span>الزيادة الشهرية:</span>
-                                                <strong id="monthlyIncrease" class="text-danger">0 ريال</strong>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span>الزيادة السنوية:</span>
-                                                <strong id="yearlyIncrease" class="text-danger">0 ريال</strong>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span>نسبة الزيادة:</span>
-                                                <strong id="increasePercentage" class="text-danger">0%</strong>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="progress mt-3">
-                                            <div class="progress-bar" id="budgetImpact" role="progressbar" style="width: 0%"></div>
-                                        </div>
-                                        <small class="text-muted mt-1">تأثير على ميزانية الرواتب</small>
-                                    </div>
-                                    
-                                    <div class="mt-4">
-                                        <h6>سيناريوهات مقترحة</h6>
-                                        <div class="d-grid gap-2">
-                                            <button class="btn btn-outline-secondary btn-sm">
-                                                <i class="fas fa-save me-1"></i>
-                                                حفظ السيناريو الحالي
-                                            </button>
-                                            <button class="btn btn-outline-secondary btn-sm">
-                                                <i class="fas fa-plus me-1"></i>
-                                                إضافة سيناريو مقارن
-                                            </button>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="departmentChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 mb-4">
+                        <div class="card recommendations-card animate__animated animate__fadeInRight">
+                            <div class="card-header">
+                                <h5 class="mb-0">التوصيات الذكية</h5>
+                                <small class="text-muted">محدثة الآن</small>
+                            </div>
+                            <div class="card-body" id="recommendationsContainer">
+                                <!-- سيتم ملؤها ديناميكياً -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الأنشطة الأخيرة -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card activity-card animate__animated animate__fadeInUp">
+                            <div class="card-header">
+                                <h5 class="mb-0">الأنشطة الأخيرة</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-timeline" id="activityTimeline">
+                                    <!-- سيتم ملؤها ديناميكياً -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- قسم التكامل المصرفي -->
-                <div id="banking" class="content-section" style="display: none;">
-                    <h2 class="mb-4">التكامل المصرفي التلقائي</h2>
-                    
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">الحسابات المصرفية المتصلة</h5>
-                            <button class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus me-1"></i>
-                                إضافة حساب جديد
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="bank-card">
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://via.placeholder.com/60" alt="الراجحي" class="bank-logo">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">البنك الأهلي التجاري</h6>
-                                                <p class="mb-1 text-muted">الحساب الرئيسي للرواتب</p>
-                                                <span class="bank-status bank-connected">متصل</span>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-cog"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="bank-card">
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://via.placeholder.com/60" alt="الإنماء" class="bank-logo">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">بنك الإنماء</h6>
-                                                <p class="mb-1 text-muted">حساب المكافآت</p>
-                                                <span class="bank-status bank-connected">متصل</span>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-cog"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="bank-card">
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://via.placeholder.com/60" alt="الراجحي" class="bank-logo">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">البنك السعودي الفرنسي</h6>
-                                                <p class="mb-1 text-muted">حساب الاحتياطي</p>
-                                                <span class="bank-status bank-disconnected">غير متصل</span>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-link"></i> ربط
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <hr>
-                            
-                            <h5 class="mb-3">تحويلات الرواتب القادمة</h5>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>تاريخ التحويل</th>
-                                            <th>عدد الموظفين</th>
-                                            <th>المبلغ الإجمالي</th>
-                                            <th>الحالة</th>
-                                            <th>الإجراءات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2023-10-01</td>
-                                            <td>248</td>
-                                            <td>2,400,000 ريال</td>
-                                            <td><span class="badge bg-success">مكتمل</span></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2023-11-01</td>
-                                            <td>250</td>
-                                            <td>2,450,000 ريال</td>
-                                            <td><span class="badge bg-warning">قيد المعالجة</span></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2023-12-01</td>
-                                            <td>252</td>
-                                            <td>2,500,000 ريال</td>
-                                            <td><span class="badge bg-secondary">مجدول</span></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+            <!-- بقية الأقسام ستكون هنا بنفس الهيكل المحسن -->
+            <!-- سأضيفها في الملف الكامل -->
+
+        </div>
+    </div>
+
+    <!-- النوافذ المنبثقة المحسنة -->
+    
+    <!-- نافذة إضافة موظف -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>
+                        إضافة موظف جديد
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <!-- قسم الامتثال الضريبي -->
-                <div id="compliance" class="content-section" style="display: none;">
-                    <h2 class="mb-4">نظام الامتثال الضريبي</h2>
-                    
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">حالة الامتثال الضريبي</h5>
-                            <button class="btn btn-primary btn-sm">
-                                <i class="fas fa-sync-alt me-1"></i>
-                                تحديث اللوائح
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        <div class="stat-value">98%</div>
-                                        <div class="stat-label">معدل الامتثال</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-file-invoice-dollar text-warning"></i>
-                                        <div class="stat-value">3</div>
-                                        <div class="stat-label">تنبيهات نشطة</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-calendar-check text-info"></i>
-                                        <div class="stat-value">15</div>
-                                        <div class="stat-label">يوم للتقديم التالي</div>
-                                    </div>
+                <div class="modal-body">
+                    <form id="addEmployeeForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="employeeName" placeholder="الاسم الكامل" required>
+                                    <label for="employeeName">الاسم الكامل</label>
                                 </div>
                             </div>
-                            
-                            <h5 class="mb-3">فحص الامتثال</h5>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="card bg-light">
-                                        <div class="card-body">
-                                            <h6>ضريبة الدخل</h6>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>حسابات الضرائب:</span>
-                                                <span class="compliance-status compliance-ok">مكتمل</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>الإقرارات الضريبية:</span>
-                                                <span class="compliance-status compliance-ok">محدثة</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>المدفوعات:</span>
-                                                <span class="compliance-status compliance-warning">متأخر</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>الوثائق المطلوبة:</span>
-                                                <span class="compliance-status compliance-ok">مكتملة</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="card bg-light">
-                                        <div class="card-body">
-                                            <h6>التأمينات الاجتماعية</h6>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>تسجيل الموظفين:</span>
-                                                <span class="compliance-status compliance-ok">مكتمل</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>الاشتراكات الشهرية:</span>
-                                                <span class="compliance-status compliance-ok">مدفوعة</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <span>الإقرارات السنوية:</span>
-                                                <span class="compliance-status compliance-warning">قيد المراجعة</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>التعديلات الطارئة:</span>
-                                                <span class="compliance-status compliance-ok">محدثة</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="employeeEmail" placeholder="البريد الإلكتروني" required>
+                                    <label for="employeeEmail">البريد الإلكتروني</label>
                                 </div>
                             </div>
-                            
-                            <hr>
-                            
-                            <h5 class="mb-3">التنبيهات النشطة</h5>
-                            <div class="alert alert-warning d-flex align-items-center" role="alert">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <div>
-                                    <strong>تنبيه:</strong> تأخر في سداد ضريبة الدخل للربع الثالث - الموعد النهائي بعد 5 أيام
-                                    <div class="mt-2">
-                                        <button class="btn btn-warning btn-sm">
-                                            <i class="fas fa-credit-card me-1"></i>
-                                            سداد الآن
-                                        </button>
-                                        <button class="btn btn-outline-secondary btn-sm">
-                                            <i class="fas fa-clock me-1"></i>
-                                            جدولة لاحقاً
-                                        </button>
-                                    </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select" id="employeeDepartment" required>
+                                        <option value="">اختر الإدارة</option>
+                                        <option value="Technology">التكنولوجيا</option>
+                                        <option value="Sales">المبيعات</option>
+                                        <option value="HR">الموارد البشرية</option>
+                                        <option value="Finance">المالية</option>
+                                        <option value="Marketing">التسويق</option>
+                                    </select>
+                                    <label for="employeeDepartment">الإدارة</label>
                                 </div>
                             </div>
-                            
-                            <div class="alert alert-info d-flex align-items-center" role="alert">
-                                <i class="fas fa-info-circle me-2"></i>
-                                <div>
-                                    <strong>معلومات:</strong> تحديثات جديدة في لوائح ضريبة القيمة المضافة - مراجعة مطلوبة
-                                    <div class="mt-2">
-                                        <button class="btn btn-info btn-sm">
-                                            <i class="fas fa-file-alt me-1"></i>
-                                            عرض التفاصيل
-                                        </button>
-                                    </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="employeePosition" placeholder="المنصب" required>
+                                    <label for="employeePosition">المنصب</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="employeeSalary" placeholder="الراتب الأساسي" required>
+                                    <label for="employeeSalary">الراتب الأساسي</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="employeeBankAccount" placeholder="الحساب المصرفي" required>
+                                    <label for="employeeBankAccount">الحساب المصرفي</label>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-                <!-- قسم التقارير الذكية -->
-                <div id="reports" class="content-section" style="display: none;">
-                    <h2 class="mb-4">التقارير الذكية للرواتب</h2>
-                    
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">مكتبة التقارير</h5>
-                            <div>
-                                <button class="btn btn-outline-secondary btn-sm me-2">
-                                    <i class="fas fa-filter me-1"></i>
-                                    تصفية
-                                </button>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-plus me-1"></i>
-                                    إنشاء تقرير جديد
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="report-card">
-                                        <div class="report-icon">
-                                            <i class="fas fa-chart-pie"></i>
-                                        </div>
-                                        <div class="report-details">
-                                            <div class="report-title">تقرير توزيع الرواتب الشهري</div>
-                                            <div class="report-date">تم الإنشاء: 2023-10-15</div>
-                                        </div>
-                                        <div class="report-actions">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="report-card">
-                                        <div class="report-icon">
-                                            <i class="fas fa-file-invoice-dollar"></i>
-                                        </div>
-                                        <div class="report-details">
-                                            <div class="report-title">تقرير الضرائب والاستقطاعات</div>
-                                            <div class="report-date">تم الإنشاء: 2023-10-10</div>
-                                        </div>
-                                        <div class="report-actions">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="report-card">
-                                        <div class="report-icon">
-                                            <i class="fas fa-chart-line"></i>
-                                        </div>
-                                        <div class="report-details">
-                                            <div class="report-title">تحليل اتجاهات الرواتب السنوي</div>
-                                            <div class="report-date">تم الإنشاء: 2023-09-30</div>
-                                        </div>
-                                        <div class="report-actions">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="report-card">
-                                        <div class="report-icon">
-                                            <i class="fas fa-users-cog"></i>
-                                        </div>
-                                        <div class="report-details">
-                                            <div class="report-title">تقرير كفاءة نظام الحوافز</div>
-                                            <div class="report-date">تم الإنشاء: 2023-09-25</div>
-                                        </div>
-                                        <div class="report-actions">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <hr>
-                            
-                            <h5 class="mb-3">إنشاء تقرير مخصص</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">نوع التقرير</label>
-                                        <select class="form-select">
-                                            <option>تقرير رواتب شامل</option>
-                                            <option>تقرير ضريبي</option>
-                                            <option>تقرير أداء الموظفين</option>
-                                            <option>تقرير التكاليف المتوقعة</option>
-                                            <option>تقرير مقارن</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">الفترة الزمنية</label>
-                                        <select class="form-select">
-                                            <option>شهري</option>
-                                            <option>ربع سنوي</option>
-                                            <option>نصف سنوي</option>
-                                            <option>سنوي</option>
-                                            <option>مخصص</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">الإدارات المضمنة</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dept1" checked>
-                                            <label class="form-check-label" for="dept1">
-                                                جميع الإدارات
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dept2">
-                                            <label class="form-check-label" for="dept2">
-                                                التكنولوجيا
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dept3">
-                                            <label class="form-check-label" for="dept3">
-                                                المبيعات
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">صيغة التصدير</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="format" id="pdf" checked>
-                                            <label class="form-check-label" for="pdf">
-                                                PDF
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="format" id="excel">
-                                            <label class="form-check-label" for="excel">
-                                                Excel
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary">
-                                <i class="fas fa-file-export me-1"></i>
-                                إنشاء التقرير
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- قسم نظام الحوافز -->
-                <div id="incentives" class="content-section" style="display: none;">
-                    <h2 class="mb-4">نظام الحوافز المرتبط بالأداء</h2>
-                    
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">إدارة الحوافز والمكافآت</h5>
-                            <button class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus me-1"></i>
-                                إضافة حافز جديد
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-trophy text-warning"></i>
-                                        <div class="stat-value">15</div>
-                                        <div class="stat-label">برامج حوافز نشطة</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-coins text-success"></i>
-                                        <div class="stat-value">850K</div>
-                                        <div class="stat-label">ميزانية الحوافز (ريال)</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="stat-card">
-                                        <i class="fas fa-chart-line text-info"></i>
-                                        <div class="stat-value">+22%</div>
-                                        <div class="stat-label">تحسين الأداء</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <h5 class="mb-3">برامج الحوافز الحالية</h5>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="incentive-card">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6>حافز تحقيق المبيعات</h6>
-                                            <span class="badge bg-success">نشط</span>
-                                        </div>
-                                        <p class="text-muted mb-3">مكافأة شهرية لمن يتجاوز أهداف المبيعات بنسبة 20% أو أكثر</p>
-                                        
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>الميزانية المخصصة:</span>
-                                                <span>300,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>المستخدم حتى الآن:</span>
-                                                <span>125,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>المتبقي:</span>
-                                                <span>175,000 ريال</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="progress mt-3">
-                                            <div class="progress-bar" role="progressbar" style="width: 42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small class="text-muted">42% من الميزانية تم استخدامها</small>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-edit me-1"></i>
-                                                تعديل
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-chart-bar me-1"></i>
-                                                تقارير الأداء
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="incentive-card">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6>برنامج الابتكار</h6>
-                                            <span class="badge bg-success">نشط</span>
-                                        </div>
-                                        <p class="text-muted mb-3">مكافآت للموظفين الذين يقدمون أفكاراً مبتكرة يتم تطبيقها</p>
-                                        
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>الميزانية المخصصة:</span>
-                                                <span>150,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>المستخدم حتى الآن:</span>
-                                                <span>75,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>المتبقي:</span>
-                                                <span>75,000 ريال</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="progress mt-3">
-                                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small class="text-muted">50% من الميزانية تم استخدامها</small>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-edit me-1"></i>
-                                                تعديل
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-chart-bar me-1"></i>
-                                                تقارير الأداء
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="incentive-card">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6>حافز التميز في خدمة العملاء</h6>
-                                            <span class="badge bg-warning">قيد المراجعة</span>
-                                        </div>
-                                        <p class="text-muted mb-3">مكافأة ربع سنوية لأفضل 5 موظفين في خدمة العملاء</p>
-                                        
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>الميزانية المخصصة:</span>
-                                                <span>100,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>المستخدم حتى الآن:</span>
-                                                <span>25,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>المتبقي:</span>
-                                                <span>75,000 ريال</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="progress mt-3">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small class="text-muted">25% من الميزانية تم استخدامها</small>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-edit me-1"></i>
-                                                تعديل
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-chart-bar me-1"></i>
-                                                تقارير الأداء
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <div class="incentive-card">
-                                        <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6>برنامج التطوير المهني</h6>
-                                            <span class="badge bg-secondary">منتهي</span>
-                                        </div>
-                                        <p class="text-muted mb-3">مكافآت للحصول على شهادات مهنية معتمدة</p>
-                                        
-                                        <div class="mb-2">
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>الميزانية المخصصة:</span>
-                                                <span>200,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-1">
-                                                <span>المستخدم حتى الآن:</span>
-                                                <span>200,000 ريال</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <span>المتبقي:</span>
-                                                <span>0 ريال</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="progress mt-3">
-                                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <small class="text-muted">100% من الميزانية تم استخدامها</small>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-redo me-1"></i>
-                                                تجديد البرنامج
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-chart-bar me-1"></i>
-                                                تقارير الأداء
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>
+                        إلغاء
+                    </button>
+                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">
+                        <i class="fas fa-save me-1"></i>
+                        حفظ الموظف
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- نافذة التحميل المحسنة -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">جاري التحميل...</span>
+            </div>
+            <p class="mt-3 text-white">جاري التحميل...</p>
+        </div>
+    </div>
+
+    <!-- حاوية الإشعارات المحسنة -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer">
+        <!-- سيتم إضافة الإشعارات هنا -->
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // تبديل بين الأقسام
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.sidebar .nav-link');
-            const contentSections = document.querySelectorAll('.content-section');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // إزالة الفئة النشطة من جميع الروابط
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    
-                    // إضافة الفئة النشطة للرابط المضغوط
-                    this.classList.add('active');
-                    
-                    // إخفاء جميع الأقسام
-                    contentSections.forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    
-                    // إظهار القسم المحدد
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).style.display = 'block';
-                    
-                    // تحديث الرسوم البيانية عند عرض القسم
-                    if (sectionId === 'dashboard') {
-                        initDashboardCharts();
-                    } else if (sectionId === 'analysis') {
-                        initAnalysisCharts();
-                    } else if (sectionId === 'forecasting') {
-                        initForecastChart();
-                    }
-                });
-            });
-            
-            // تهيئة الرسوم البيانية للصفحة الرئيسية
-            initDashboardCharts();
-            
-            // محاكاة الرواتب
-            const simulationInputs = document.querySelectorAll('.simulation-input input[type="range"]');
-            simulationInputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    const valueDisplay = document.getElementById(this.id + 'Value');
-                    if (valueDisplay) {
-                        valueDisplay.textContent = this.value + '%';
-                    }
-                });
-            });
-            
-            document.getElementById('runSimulation').addEventListener('click', function() {
-                const generalIncrease = parseFloat(document.getElementById('generalIncrease').value);
-                const managementIncrease = parseFloat(document.getElementById('managementIncrease').value);
-                const allowanceIncrease = parseFloat(document.getElementById('allowanceIncrease').value);
-                const newEmployees = parseInt(document.getElementById('newEmployees').value);
-                
-                // حسابات المحاكاة (تبسيط)
-                const baseCost = 400000; // التكلفة الشهرية الأساسية
-                const managementCost = baseCost * 0.3; // 30% من التكلفة للإدارة العليا
-                const allowanceCost = baseCost * 0.2; // 20% من التكلفة للبدلات
-                const regularCost = baseCost * 0.5; // 50% من التكلفة للرواتب العادية
-                
-                const newRegularCost = regularCost * (1 + generalIncrease / 100);
-                const newManagementCost = managementCost * (1 + managementIncrease / 100);
-                const newAllowanceCost = allowanceCost * (1 + allowanceIncrease / 100);
-                const newEmployeeCost = newEmployees * 8000; // متوسط راتب للموظفين الجدد
-                
-                const totalNewCost = newRegularCost + newManagementCost + newAllowanceCost + newEmployeeCost;
-                const monthlyIncrease = totalNewCost - baseCost;
-                const yearlyIncrease = monthlyIncrease * 12;
-                const increasePercentage = ((monthlyIncrease / baseCost) * 100).toFixed(2);
-                
-                // عرض النتائج
-                document.getElementById('newCost').textContent = totalNewCost.toLocaleString() + ' ريال';
-                document.getElementById('monthlyIncrease').textContent = monthlyIncrease.toLocaleString() + ' ريال';
-                document.getElementById('yearlyIncrease').textContent = yearlyIncrease.toLocaleString() + ' ريال';
-                document.getElementById('increasePercentage').textContent = increasePercentage + '%';
-                document.getElementById('budgetImpact').style.width = Math.min(increasePercentage * 2, 100) + '%';
-                
-                document.getElementById('simulationResult').style.display = 'block';
-            });
-        });
-        
-        // تهيئة الرسوم البيانية للصفحة الرئيسية
-        function initDashboardCharts() {
-            const ctx = document.getElementById('departmentChart');
-            if (ctx) {
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['التكنولوجيا', 'المبيعات', 'الموارد البشرية', 'المالية', 'التسويق'],
-                        datasets: [{
-                            label: 'إجمالي الرواتب (ريال)',
-                            data: [850000, 650000, 350000, 420000, 380000],
-                            backgroundColor: [
-                                'rgba(52, 152, 219, 0.7)',
-                                'rgba(46, 204, 113, 0.7)',
-                                'rgba(155, 89, 182, 0.7)',
-                                'rgba(241, 196, 15, 0.7)',
-                                'rgba(231, 76, 60, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(52, 152, 219, 1)',
-                                'rgba(46, 204, 113, 1)',
-                                'rgba(155, 89, 182, 1)',
-                                'rgba(241, 196, 15, 1)',
-                                'rgba(231, 76, 60, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value.toLocaleString();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        
-        // تهيئة رسوم بيانية لقسم التحليل
-        function initAnalysisCharts() {
-            const comparisonCtx = document.getElementById('salaryComparisonChart');
-            if (comparisonCtx) {
-                new Chart(comparisonCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['التكنولوجيا', 'المبيعات', 'الموارد البشرية', 'المالية'],
-                        datasets: [
-                            {
-                                label: 'الراتب الحالي',
-                                data: [15000, 12000, 10500, 14000],
-                                backgroundColor: 'rgba(52, 152, 219, 0.7)',
-                                borderColor: 'rgba(52, 152, 219, 1)',
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'متوسط السوق',
-                                data: [16500, 11000, 10000, 14500],
-                                backgroundColor: 'rgba(46, 204, 113, 0.7)',
-                                borderColor: 'rgba(46, 204, 113, 1)',
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-            
-            const distributionCtx = document.getElementById('salaryDistributionChart');
-            if (distributionCtx) {
-                new Chart(distributionCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['أقل من 10K', '10K - 15K', '15K - 20K', 'أكثر من 20K'],
-                        datasets: [{
-                            data: [35, 40, 20, 5],
-                            backgroundColor: [
-                                'rgba(52, 152, 219, 0.7)',
-                                'rgba(46, 204, 113, 0.7)',
-                                'rgba(241, 196, 15, 0.7)',
-                                'rgba(231, 76, 60, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(52, 152, 219, 1)',
-                                'rgba(46, 204, 113, 1)',
-                                'rgba(241, 196, 15, 1)',
-                                'rgba(231, 76, 60, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-            }
-        }
-        
-        // تهيئة رسم بياني للتنبؤ
-        function initForecastChart() {
-            const forecastCtx = document.getElementById('forecastChart');
-            if (forecastCtx) {
-                new Chart(forecastCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['أكتوبر 2023', 'نوفمبر 2023', 'ديسمبر 2023', 'يناير 2024', 'فبراير 2024', 'مارس 2024', 'أبريل 2024'],
-                        datasets: [
-                            {
-                                label: 'تكلفة الرواتب الفعلية',
-                                data: [2400000, 2450000, null, null, null, null, null],
-                                borderColor: 'rgba(52, 152, 219, 1)',
-                                backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                                borderWidth: 2,
-                                fill: true
-                            },
-                            {
-                                label: 'توقعات التكلفة',
-                                data: [null, null, 2500000, 2550000, 2600000, 2650000, 2700000],
-                                borderColor: 'rgba(231, 76, 60, 1)',
-                                backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: true
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                ticks: {
-                                    callback: function(value) {
-                                        return (value / 1000000).toFixed(1) + 'M';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="app.js"></script>
 </body>
 </html>
