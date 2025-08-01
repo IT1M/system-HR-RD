@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الموارد البشرية والبحث والتطوير بالذكاء الاصطناعي - MAIS MEDICAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .tech-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="https://maisco.com.sa/wp-content/uploads/2023/01/MAIS-LOGO.png" alt="MAIS MEDICAL" class="h-12">
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-bold text-blue-900">MAIS MEDICAL PROJECT Co.</h1>
+                        <p class="text-sm text-gray-600">النظام الداخلي للموارد البشرية والبحث والتطوير</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-6 space-x-reverse">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 font-medium transition">المميزات</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 font-medium transition">كيف يعمل</a>
+                    <a href="#benefits" class="text-gray-700 hover:text-blue-600 font-medium transition">الفوائد</a>
+                    <a href="#support" class="text-gray-700 hover:text-blue-600 font-medium transition">الدعم</a>
+                </nav>
+                
+                <button class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                    <i class="fas fa-sign-in-alt ml-2"></i> تسجيل الدخول
+                </button>
+                
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        نظامنا الداخلي المتطور
+                        <span class="block text-yellow-300">لإدارة الموارد البشرية والأبحاث</span>
+                    </h2>
+                    <p class="text-xl mb-8 text-blue-100">
+                        منصة متكاملة مصممة خصيصاً لموظفي MAIS MEDICAL لتحسين الكفاءة وتمكين الابتكار
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition">
+                            <i class="fas fa-desktop ml-2"></i> الدخول للنظام
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-900 transition">
+                            <i class="fas fa-question-circle ml-2"></i> المساعدة
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="animate-float">
+                        <i class="fas fa-shield-alt text-9xl text-blue-200 opacity-50"></i>
+                    </div>
+                    <div class="absolute top-10 right-10 animate-pulse">
+                        <i class="fas fa-user-shield text-6xl text-yellow-300"></i>
+                    </div>
+                    <div class="absolute bottom-10 left-10 animate-bounce">
+                        <i class="fas fa-lock text-5xl text-green-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">مميزات نظامنا الداخلي</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    أدوات متطورة مصممة لخدمة موظفي MAIS MEDICAL وتعزيز كفاءة العمليات الداخلية
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-tie text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">إدارة الموظفين</h3>
+                        <p class="text-gray-600">
+                            إدارة شاملة لبيانات الموظفين، الإجازات، التقييمات، والتطور المهني
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-microscope text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">إدارة الأبحاث</h3>
+                        <p class="text-gray-600">
+                            متابعة المشاريع البحثية، النتائج، والنشرات العلمية داخل الشركة
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">تحليل ذكي</h3>
+                        <p class="text-gray-600">
+                            رؤى وتحليلات قائمة على الذكاء الاصطناعي لاتخاذ قرارات أفضل
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">أمان متقدم</h3>
+                        <p class="text-gray-600">
+                            حماية كاملة للبيانات الداخلية مع صلاحيات وصول مرنة وآمنة
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">التدريب والتطوير</h3>
+                        <p class="text-gray-600">
+                            برامج تدريبية مخصصة ومسارات تطوير مهني للموظفين
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-4xl tech-icon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">تقارير ولوحات معلومات</h3>
+                        <p class="text-gray-600">
+                            تقارير تفصيلية ولوحات معلومات تفاعلية للمتابعة والتحليل
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">كيف تستخدم النظام؟</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    خطوات بسيطة للاستفادة من جميع مميزات النظام الداخلي
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">تسجيل الدخول</h3>
+                    <p class="text-gray-600">
+                        ادخل باستخدام بياناتك الموحدة للشركة
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">اختر القسم</h3>
+                    <p class="text-gray-600">
+                        انتقل بين أقسام الموارد البشرية والأبحاث بسهولة
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">نفذ المهام</h3>
+                    <p class="text-gray-600">
+                        استخدم الأدوات المتاحة لإدارة مهامك اليومية
+                    </p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-yellow-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
+                        4
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">تابع النتائج</h3>
+                    <p class="text-gray-600">
+                        راصد التقدم والتحليلات من لوحة المعلومات
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">فوائد استخدام النظام</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    تحسين تجربة الموظفين ورفع كفاءة العمليات الداخلية
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-2xl ml-4 mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-900 mb-2">توفير الوقت والجهد</h3>
+                                <p class="text-gray-600">أتمتة المهام الروتينية وتقليل الوقت المستغرق في الإجراءات الإدارية</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-2xl ml-4 mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-900 mb-2">تحسين التواصل</h3>
+                                <p class="text-gray-600">منصة موحدة للتواصل بين الإدارات والموظفين</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-2xl ml-4 mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-900 mb-2">اتخاذ قرارات مدعومة</h3>
+                                <p class="text-gray-600">تحليلات دقيقة تساعد في اتخاذ قرارات استراتيجية</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-2xl ml-4 mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-900 mb-2">تطوير المهارات</h3>
+                                <p class="text-gray-600">برامج تدريبية مخصصة لتنمية قدرات الموظفين</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-users text-6xl text-blue-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4">تجربة موظفين محسّنة</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">رضا الموظفين</span>
+                                <span class="text-blue-900 font-bold">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-blue-600 h-3 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">كفاءة العمليات</span>
+                                <span class="text-blue-900 font-bold">94%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-green-600 h-3 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">جودة الأبحاث</span>
+                                <span class="text-blue-900 font-bold">82%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-purple-600 h-3 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employee Testimonials Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">تجارب موظفينا</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    آراء الموظفين الذين يستخدمون النظام يومياً
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارة أحمد" class="w-16 h-16 rounded-full ml-4">
+                        <div>
+                            <h4 class="font-bold text-blue-900">سارة أحمد</h4>
+                            <p class="text-gray-600 text-sm">موظفة موارد بشرية</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "النظام سهّل إدارة جميع إجراءات الموارد البشرية، من طلبات الإجازات إلى تقييمات الأداء"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="محمد خالد" class="w-16 h-16 rounded-full ml-4">
+                        <div>
+                            <h4 class="font-bold text-blue-900">محمد خالد</h4>
+                            <p class="text-gray-600 text-sm">باحث طبي</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "أدوات تحليل البيانات ساعدتنا في تسريع أبحاثنا وتقديم نتائج دقيقة بشكل أسرع"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="أمل عبدالله" class="w-16 h-16 rounded-full ml-4">
+                        <div>
+                            <h4 class="font-bold text-blue-900">أمل عبدالله</h4>
+                            <p class="text-gray-600 text-sm">مديرة قسم</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "لوحة المعلومات التفاعلية ساعدتني في متابعة أداء الفريق واتخاذ قرارات أفضل"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">الدعم الفني</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    فريق الدعم جاهز لمساعدتك في استخدام النظام بكفاءة
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <i class="fas fa-book text-5xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">دليل المستخدم</h3>
+                    <p class="text-gray-600 mb-4">وثائق شاملة توضح كيفية استخدام جميع ميزات النظام</p>
+                    <button class="text-blue-600 font-bold hover:text-blue-800">
+                        عرض الدليل <i class="fas fa-arrow-left mr-1"></i>
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <i class="fas fa-headset text-5xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">الدعم المباشر</h3>
+                    <p class="text-gray-600 mb-4">تواصل مع فريق الدعم الفني للحصول على مساعدة فورية</p>
+                    <button class="text-green-600 font-bold hover:text-green-800">
+                        تواصل الآن <i class="fas fa-arrow-left mr-1"></i>
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <i class="fas fa-chalkboard-teacher text-5xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">دورات تدريبية</h3>
+                    <p class="text-gray-600 mb-4">دورات متخصصة لتعلم استخدام النظام بفعالية</p>
+                    <button class="text-purple-600 font-bold hover:text-purple-800">
+                        سجل الآن <i class="fas fa-arrow-left mr-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">جاهز لاستخدام النظام؟</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                سجل دخولك الآن للاستفادة من جميع مميزات النظام الداخلي
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition">
+                    <i class="fas fa-sign-in-alt ml-2"></i> تسجيل الدخول للنظام
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-900 transition">
+                    <i class="fas fa-key ml-2"></i> نسيت كلمة المرور
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://maisco.com.sa/wp-content/uploads/2023/01/MAIS-LOGO.png" alt="MAIS MEDICAL" class="h-12 mb-4">
+                    <p class="text-gray-400">
+                        نظام داخلي متطور لإدارة الموارد البشرية والأبحاث في MAIS MEDICAL
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-4">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الرئيسية</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">المميزات</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">كيف يعمل</a></li>
+                        <li><a href="#support" class="text-gray-400 hover:text-white transition">الدعم</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-4">الدعم الفني</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone ml-2"></i> Ext: 1234</li>
+                        <li><i class="fas fa-envelope ml-2"></i> hr-rd-support@mais-medical.com</li>
+                        <li><i class="fas fa-clock ml-2"></i> السبت - الخميس: 8AM - 5PM</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-4">روابط مهمة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">دليل المستخدم</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الشروط والأحكام</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 MAIS MEDICAL PROJECT Co. نظام داخلي - جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        const mobileMenu = document.createElement('div');
+        mobileMenu.className = 'fixed inset-0 bg-white z-50 p-4 hidden';
+        mobileMenu.innerHTML = `
+            <div class="flex justify-between items-center mb-8">
+                <img src="https://maisco.com.sa/wp-content/uploads/2023/01/MAIS-LOGO.png" alt="MAIS MEDICAL" class="h-10">
+                <button class="text-gray-700" onclick="toggleMobileMenu()">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="#features" class="block text-gray-700 hover:text-blue-600 font-medium text-lg" onclick="toggleMobileMenu()">المميزات</a>
+                <a href="#how-it-works" class="block text-gray-700 hover:text-blue-600 font-medium text-lg" onclick="toggleMobileMenu()">كيف يعمل</a>
+                <a href="#benefits" class="block text-gray-700 hover:text-blue-600 font-medium text-lg" onclick="toggleMobileMenu()">الفوائد</a>
+                <a href="#support" class="block text-gray-700 hover:text-blue-600 font-medium text-lg" onclick="toggleMobileMenu()">الدعم</a>
+            </nav>
+        `;
+        document.body.appendChild(mobileMenu);
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
